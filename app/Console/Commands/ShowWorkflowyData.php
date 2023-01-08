@@ -19,7 +19,7 @@ class ShowWorkflowyData extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Outputs all workflowy data as JSON';
 
     /**
      * Execute the console command.
@@ -29,7 +29,7 @@ class ShowWorkflowyData extends Command
     public function handle()
     {
         $workflowy = new Workflowy();
-        $this->output->writeln(json_encode($workflowy->all(), JSON_PRETTY_PRINT));
+        $this->output->writeln(json_encode($workflowy->data(), JSON_PRETTY_PRINT));
 
         return Command::SUCCESS;
     }

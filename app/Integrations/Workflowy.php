@@ -3,6 +3,8 @@
 namespace App\Integrations;
 
 use App\Exceptions\NotImplemented;
+use App\Integrations\Workflowy\Data;
+use App\Integrations\Workflowy\Query;
 use Illuminate\Support\Facades\Http;
 
 class Workflowy
@@ -13,7 +15,7 @@ class Workflowy
 
     protected ?string $sessionId = null;
 
-    public function all(): \stdClass | null {
+    public function data(): \stdClass {
         $this->loginBeforeFirstApiCall();
 
         $query = http_build_query([
@@ -27,7 +29,13 @@ class Workflowy
 
         $response->throw();
 
-        return $response->object();
+        $data = $response->object();
+
+        if (!$data) {
+            throw new NotImplemented('Workflowy returned no data');
+        }
+
+        return $data;
     }
 
     protected function loginBeforeFirstApiCall(): void
@@ -46,5 +54,11 @@ class Workflowy
 
         $this->sessionId = $response->cookies()
             ->getCookieByName('sessionid')->getValue();
+    }
+
+    public function query(): Query
+    {
+        $data = new Data($this, $this->data());
+        return new Query($data, $data->topNodes());
     }
 }
