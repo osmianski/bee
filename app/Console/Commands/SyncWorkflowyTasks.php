@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use App\Integrations\Workflowy;
 use Illuminate\Console\Command;
 
-class OrganizeWorkflowyTasks extends Command
+class SyncWorkflowyTasks extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'workflowy:organize';
+    protected $signature = 'workflowy:sync';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Organize workflowy tasks, see https://workflowy.com/#/fea979048554';
+    protected $description = 'Syncs workflowy tasks';
 
     /**
      * Execute the console command.
