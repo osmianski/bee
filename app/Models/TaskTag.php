@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\TaskTag
@@ -22,8 +23,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|TaskTag whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskTag whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskTag whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|TaskTag onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|TaskTag withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|TaskTag withoutTrashed()
  */
 class TaskTag extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 }

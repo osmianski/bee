@@ -16,7 +16,15 @@ return new class extends Migration
         Schema::create('task_ids', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletesTz();
+
+            $table->foreignId('task_id')
+                ->nullable()
+                ->constrained('tasks')
+                ->cascadeOnDelete();
+
             $table->string('workflowy_id')->unique();
+            $table->string('section')->nullable();
         });
     }
 

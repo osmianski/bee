@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Tag
@@ -22,8 +23,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Tag whereString($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tag whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Query\Builder|Tag onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Tag withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Tag withoutTrashed()
  */
 class Tag extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 }

@@ -25,10 +25,10 @@ return new class extends Migration
 
             $table->json('data')->nullable();
 
-            $table->string('section')->nullable();
             $table->text('name')->nullable();
             $table->text('note')->nullable();
-            $table->unsignedInteger('position')->default(0);
+            $table->unsignedInteger('position')->nullable();
+            $table->string('original_workflowy_id')->unique();
 
             $table->foreignId('category_id')
                 ->nullable()

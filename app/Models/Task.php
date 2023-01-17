@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Task
@@ -40,8 +41,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereSection($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskId[] $taskIds
+ * @property-read int|null $task_ids_count
+ * @method static \Illuminate\Database\Query\Builder|Task onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Task withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Task withoutTrashed()
+ * @property string $original_workflowy_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereOriginalWorkflowyId($value)
  */
 class Task extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    public function taskIds()
+    {
+        return $this->hasMany(TaskId::class);
+    }
 }

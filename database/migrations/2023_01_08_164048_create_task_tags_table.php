@@ -20,12 +20,12 @@ return new class extends Migration
             $table->foreignId('tag_id')
                 ->nullable()
                 ->constrained('tags')
-                ->nullOnDelete();
+                ->cascadeOnDelete();
 
             $table->foreignId('task_id')
                 ->nullable()
                 ->constrained('tasks')
-                ->nullOnDelete();
+                ->cascadeOnDelete();
         });
     }
 

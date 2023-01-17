@@ -19,7 +19,7 @@ class ShowWorkflowyData extends Command
      *
      * @var string
      */
-    protected $description = 'Outputs all workflowy data as JSON';
+    protected $description = 'Outputs Workflowy data as JSON';
 
     /**
      * Execute the console command.
