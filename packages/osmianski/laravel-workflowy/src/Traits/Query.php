@@ -28,7 +28,7 @@ trait Query
             $entry->parents = $parents;
 
             $result = array_merge($result,
-                $this->doQuery($node->children, array_merge($parents, $entry)));
+                $this->doQuery($node->children, array_merge($parents, [$entry])));
         }
 
         return $result;
