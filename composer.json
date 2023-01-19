@@ -10,7 +10,8 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "osmianski/laravel-workflowy": "@dev"
+        "osmianski/laravel-workflowy": "@dev",
+        "osmianski/super-objects": "@dev"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
@@ -66,6 +67,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": {
+        "osmianski/super-objects": {
+            "type": "path",
+            "url": "packages/osmianski/super-objects",
+            "options": {
+                "symlink": true
+            }
+        },
         "osmianski/laravel-workflowy": {
             "type": "path",
             "url": "packages/osmianski/laravel-workflowy",

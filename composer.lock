@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4be5367f50fd8bc9a598bfa15e03e7b",
+    "content-hash": "ce6e1b13abbd40309b92302c00e68c50",
     "packages": [
         {
             "name": "brick/math",
@@ -2159,6 +2159,51 @@
             "keywords": [
                 "Laravel",
                 "Workflowy"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "osmianski/super-objects",
+            "version": "0.2.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "packages/osmianski/super-objects",
+                "reference": "d5408aface292484bc9a4cd293942d4e3f41467f"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Osmianski\\SuperObjects\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Osmianski\\SuperObjects\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vlad Osmianski",
+                    "email": "vlaosm@gmail.com",
+                    "homepage": "https://osmianski.com/"
+                }
+            ],
+            "description": "A library providing a base class for creating super objects in PHP, the ones with lazy properties, elegant dependency injection, and more.",
+            "homepage": "https://github.com/osmianski/super-objects",
+            "keywords": [
+                "Lazy",
+                "Objects",
+                "Properties",
+                "Super"
             ],
             "transport-options": {
                 "symlink": true,
@@ -8600,7 +8645,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "osmianski/laravel-workflowy": 20
+        "osmianski/laravel-workflowy": 20,
+        "osmianski/super-objects": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
