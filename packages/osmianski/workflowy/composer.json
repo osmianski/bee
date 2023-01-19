@@ -1,0 +1,41 @@
+{
+    "name": "osmianski/workflowy",
+    "description": "A Laravel package for reading, parsing and querying Workflowy data",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladislav Osmianskij",
+            "email": "vlaosm@gmail.com",
+            "homepage": "https://osmianski.com/"
+        }
+    ],
+    "homepage": "https://github.com/osmianski/workflowy",
+    "keywords": ["Laravel", "Workflowy"],
+    "require": {
+        "illuminate/support": "~9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Osmianski\\Workflowy\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Osmianski\\Workflowy\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Osmianski\\Workflowy\\WorkflowyServiceProvider"
+            ],
+            "aliases": {
+                "Workflowy": "Osmianski\\Workflowy\\Facades\\Workflowy"
+            }
+        }
+    }
+}

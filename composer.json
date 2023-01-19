@@ -9,11 +9,13 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "osmianski/workflowy": "@dev"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
+        "jeroen-g/laravel-packager": "^2.8",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
@@ -62,5 +64,14 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "osmianski/workflowy": {
+            "type": "path",
+            "url": "/home/vo/projects/bee/packages/osmianski/workflowy",
+            "options": {
+                "symlink": true
+            }
+        }
+    }
 }

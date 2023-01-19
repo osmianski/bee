@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+use Osmianski\Workflowy\Workflowy;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -17,5 +18,10 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
+    }
+
+    public function test_that_workflowy_package_is_registered()
+    {
+        $this->assertTrue(Workflowy::test());
     }
 }
