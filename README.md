@@ -93,4 +93,4 @@ Install the project in the `~/projects/bee` directory (the project directory):
 
 ## License
 
-Bee is open-sourced software licensed under the [MIT license](https://github.com/osmianski/bee/blob/HEAD/LICENSE.md).
+Bee is open-sourced software licensed under the [MIT license](LICENSE.md).
