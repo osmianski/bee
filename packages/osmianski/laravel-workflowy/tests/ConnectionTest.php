@@ -4,6 +4,7 @@ namespace Osmianski\Workflowy\Tests;
 
 use Orchestra\Testbench\TestCase;
 use Osmianski\Workflowy\Facades\Workflowy;
+use Osmianski\Workflowy\Node;
 use Osmianski\Workflowy\WorkflowyServiceProvider;
 
 class ConnectionTest extends TestCase
@@ -24,8 +25,14 @@ class ConnectionTest extends TestCase
 
     public function test_that_it_connects_to_workflowy()
     {
-        $raw = Workflowy::getWorkspace()->raw;
-        $this->assertNotNull($raw);
+        $this->assertNotNull(Workflowy::getWorkspace()->raw);
     }
 
+    public function test_workspace_api()
+    {
+        $workspace = Workflowy::getWorkspace();
+
+        $this->assertCount(1, $workspace->children);
+        $this->assertInstanceOf(Node::class, $workspace->children[0]);
+    }
 }
