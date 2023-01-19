@@ -1,5 +1,5 @@
 {
-    "name": "osmianski/workflowy",
+    "name": "osmianski/laravel-workflowy",
     "description": "A Laravel package for reading, parsing and querying Workflowy data",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
             "homepage": "https://osmianski.com/"
         }
     ],
-    "homepage": "https://github.com/osmianski/workflowy",
+    "homepage": "https://github.com/osmianski/laravel-workflowy",
     "keywords": ["Laravel", "Workflowy"],
     "require": {
         "illuminate/support": "~9"
