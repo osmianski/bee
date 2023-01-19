@@ -10,6 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "osmianski/laravel-sync": "@dev",
         "osmianski/laravel-workflowy": "@dev",
         "osmianski/super-objects": "@dev"
     },
@@ -67,6 +68,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": {
+        "osmianski/laravel-sync": {
+            "type": "path",
+            "url": "packages/osmianski/laravel-sync",
+            "options": {
+                "symlink": true
+            }
+        },
         "osmianski/super-objects": {
             "type": "path",
             "url": "packages/osmianski/super-objects",

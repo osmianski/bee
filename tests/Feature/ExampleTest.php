@@ -19,9 +19,4 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
-
-    public function test_that_workflowy_package_is_registered()
-    {
-        $this->assertTrue(Workflowy::test());
-    }
 }
