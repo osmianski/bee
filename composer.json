@@ -68,7 +68,7 @@
     "repositories": {
         "osmianski/workflowy": {
             "type": "path",
-            "url": "/home/vo/projects/bee/packages/osmianski/workflowy",
+            "url": "packages/osmianski/workflowy",
             "options": {
                 "symlink": true
             }
