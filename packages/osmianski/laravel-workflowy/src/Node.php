@@ -6,10 +6,13 @@ use Illuminate\Support\Collection;
 use Osmianski\SuperObjects\Exceptions\Required;
 use Osmianski\SuperObjects\SuperObject;
 use Osmianski\Workflowy\Enums\Layout;
+use Osmianski\Workflowy\Traits\Query;
 
 /**
  * @property Workspace $workspace
  * @property \stdClass $raw
+ * @property Node[] $parents
+ * @property int $depth
  * @property string $id
  * @property ?string $name
  * @property ?string $note
@@ -18,12 +21,22 @@ use Osmianski\Workflowy\Enums\Layout;
  */
 class Node extends SuperObject
 {
+    use Query;
+
     protected function get_workspace(): Workspace {
         throw new Required(__METHOD__);
     }
 
     protected function get_raw(): \stdClass {
         throw new Required(__METHOD__);
+    }
+
+    protected function get_parents(): array {
+        return [];
+    }
+
+    protected function get_depth(): int {
+        return count($this->parents);
     }
 
     protected function get_id(): string {
@@ -51,6 +64,7 @@ class Node extends SuperObject
             ->map(fn(\stdClass $raw) => new Node([
                 'workspace' => $this,
                 'raw' => $raw,
+                'parents' => [$this],
             ]));
     }
 }

@@ -5,6 +5,7 @@ namespace Osmianski\Workflowy;
 use Illuminate\Support\Collection;
 use Osmianski\SuperObjects\Exceptions\Required;
 use Osmianski\SuperObjects\SuperObject;
+use Osmianski\Workflowy\Traits\Query;
 
 /**
  * @property \stdClass $raw
@@ -12,6 +13,8 @@ use Osmianski\SuperObjects\SuperObject;
  */
 class Workspace extends SuperObject
 {
+    use Query;
+
     protected function get_raw(): \stdClass {
         throw new Required(__METHOD__);
     }
