@@ -32,7 +32,10 @@
         "laravel": {
             "providers": [
                 "Osmianski\\Sync\\SyncServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Sync": "Osmianski\\Sync\\Facades\\Sync"
+            }
         }
     }
 }

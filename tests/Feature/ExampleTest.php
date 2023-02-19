@@ -1,22 +1,61 @@
 <?php
 
-namespace Tests\Feature;
+use Osmianski\Sync\Facades\Sync;
+use function Spatie\Snapshots\assertMatchesObjectSnapshot;
+use Osmianski\Workflowy\Facades\Workflowy;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use Osmianski\Workflowy\Workflowy;
-use Tests\TestCase;
+it('renders the home page')->get('/')->assertStatus(200);
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_the_application_returns_a_successful_response()
-    {
-        $response = $this->get('/');
+it('expects workflowy data to stay the same', function() {
+    $raw = Workflowy::getWorkspace()->raw;
 
-        $response->assertStatus(200);
-    }
-}
+    assertMatchesObjectSnapshot($raw);
+
+    return $raw;
+});
+
+it('syncs calendar from an array', function() {
+    $inserted = Str::uuid()->toString();
+    $updated = Str::uuid()->toString();
+    $deleted = Str::uuid()->toString();
+
+    Sync::from([
+        [
+            'workflowy_id' => $updated,
+        ],
+        [
+            'workflowy_id' => $deleted,
+        ],
+    ])->to(CalendarEntry::class)->now();
+
+    $this->assertDatabaseCount('calendar_entries', 2);
+    $this->assertDatabaseMissing('calendar_entries', [
+        'workflowy_id' => $inserted,
+    ]);
+    $this->assertDatabaseHas('calendar_entries', [
+        'workflowy_id' => $updated,
+    ]);
+    $this->assertDatabaseHas('calendar_entries', [
+        'workflowy_id' => $deleted,
+    ]);
+
+    Sync::from([
+        [
+            'workflowy_id' => $inserted,
+        ],
+        [
+            'workflowy_id' => $updated,
+        ],
+    ])->to(CalendarEntry::class)->now();
+
+    $this->assertDatabaseCount('calendar_entries', 2);
+    $this->assertDatabaseHas('calendar_entries', [
+        'workflowy_id' => $inserted,
+    ]);
+    $this->assertDatabaseHas('calendar_entries', [
+        'workflowy_id' => $updated,
+    ]);
+    $this->assertDatabaseMissing('calendar_entries', [
+        'workflowy_id' => $deleted,
+    ]);
+});

@@ -17666,15 +17666,6 @@
                         /** @var \Osmianski\Workflowy\Workflowy $instance */
                         return $instance->getWorkspace();
         }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function test()
-        {
-                        return \Osmianski\Workflowy\Workflowy::test();
-        }
          
     }
      

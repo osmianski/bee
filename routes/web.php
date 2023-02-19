@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    DB::table('qq')->get();
     return view('welcome');
 });
