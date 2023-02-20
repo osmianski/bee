@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\PullWorkflowyWorkspace;
 use Illuminate\Console\Command;
 
 class WorkflowyPull extends Command
@@ -25,6 +26,6 @@ class WorkflowyPull extends Command
      */
     public function handle(): void
     {
-        //
+        PullWorkflowyWorkspace::dispatch();
     }
 }
