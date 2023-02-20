@@ -19,7 +19,7 @@ return [
         'title' => 'Tasks',
         'items' => [
             [
-                //'route' => 'tasks',
+                'route' => 'tasks.all',
                 'title' => 'All tasks',
             ],
         ],

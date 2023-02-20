@@ -16,12 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('pages.dashboard');
     })->name('home');
 
     Route::get('/projects', function () {
         return view('pages.projects');
     })->name('projects');
+
+    Route::get('/tasks/all', function () {
+        return view('pages.tasks');
+    })->name('tasks.all');
 });
 
 //Route::get('/dashboard', function () {
