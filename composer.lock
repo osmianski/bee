@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb22994d94a6864d29dfd969ac17cbdd",
+    "content-hash": "ba87c07522511a6f930bfeef0d10a152",
     "packages": [
         {
             "name": "brick/math",
@@ -2202,6 +2202,60 @@
                 }
             ],
             "time": "2023-02-08T01:06:31+00:00"
+        },
+        {
+            "name": "osmianski/laravel-workflowy",
+            "version": "0.3.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "packages/osmianski/laravel-workflowy",
+                "reference": "6cf59778940f9cf26834fb73e8a2d4c8aee1f4df"
+            },
+            "require": {
+                "illuminate/support": "~10"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7",
+                "phpunit/phpunit": "~10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Osmianski\\Workflowy\\WorkflowyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Osmianski\\Workflowy\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Osmianski\\Workflowy\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladislav Osmianskij",
+                    "email": "vlaosm@gmail.com",
+                    "homepage": "https://osmianski.com/"
+                }
+            ],
+            "description": "A Laravel package for reading, parsing and querying Workflowy data",
+            "homepage": "https://github.com/osmianski/laravel-workflowy",
+            "keywords": [
+                "Laravel",
+                "Workflowy"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "phpoption/phpoption",
@@ -8593,7 +8647,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "osmianski/laravel-workflowy": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
