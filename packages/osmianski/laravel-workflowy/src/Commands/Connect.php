@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Osmianski\Workflowy\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Crypt;
+use Osmianski\Workflowy\Exceptions\InvalidCredentials;
+use Osmianski\Workflowy\Workflowy;
 
-class WorkflowyConnect extends Command
+class Connect extends Command
 {
     /**
      * The name and signature of the console command.
@@ -19,20 +21,32 @@ class WorkflowyConnect extends Command
      *
      * @var string
      */
-    protected $description = 'Configure Workflowy connection';
+    protected $description = 'Configure and test Workflowy connection';
 
     /**
      * Execute the console command.
      */
     public function handle(): void
     {
-        $this->info('Enter your Workflowy credentials');
-        $email = $this->ask('Email');
-        $password = $this->secret('Password');
+        $this->line('Enter your Workflowy credentials');
+        $username = $this->ask('Username');
+        $password = Crypt::encrypt($this->secret('Password'));
+
+        $workflowy = new Workflowy();
+        $workflowy->setCredentials($username, $password);
+
+        try {
+            $workflowy->connect();
+        }
+        catch (InvalidCredentials $e) {
+            $this->error($e->getMessage());
+        }
+
+        $this->info('Successfully connected to Workflowy!');
 
         $this->writeNewEnvironmentFileWith([
-            'WORKFLOWY_EMAIL' => $email,
-            'WORKFLOWY_PASSWORD' => Crypt::encrypt($password),
+            'WORKFLOWY_USERNAME' => $username,
+            'WORKFLOWY_PASSWORD' => $password,
         ]);
     }
 
