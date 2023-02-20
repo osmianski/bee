@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1faaf5ad452ac2c2ee4966af051dafc",
+    "content-hash": "926d02d36f8e088606e60617dceb675d",
     "packages": [
         {
             "name": "brick/math",
@@ -2271,6 +2271,60 @@
                 }
             ],
             "time": "2023-02-08T01:06:31+00:00"
+        },
+        {
+            "name": "osmianski/laravel-helper",
+            "version": "0.3.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "packages/osmianski/laravel-helper",
+                "reference": "8c2b59d69cc8c03a7d73e1d9a5106744836b99f5"
+            },
+            "require": {
+                "illuminate/support": "~10"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7",
+                "phpunit/phpunit": "~10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Osmianski\\Helper\\HelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Osmianski\\Helper\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Osmianski\\Helper\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladislav Osmianskij",
+                    "email": "vlaosm@gmail.com",
+                    "homepage": "https://osmianski.com/"
+                }
+            ],
+            "description": "Helper classes and function for Laravel development",
+            "homepage": "https://github.com/osmianski/laravel-helper",
+            "keywords": [
+                "Helper",
+                "Laravel"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "osmianski/laravel-workflowy",
@@ -8717,6 +8771,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "osmianski/laravel-helper": 20,
         "osmianski/laravel-workflowy": 20
     },
     "prefer-stable": true,

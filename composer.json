@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/telescope": "^4.13",
         "laravel/tinker": "^2.8",
+        "osmianski/laravel-helper": "@dev",
         "osmianski/laravel-workflowy": "@dev"
     },
     "require-dev": {
@@ -67,6 +68,13 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "repositories": {
+        "osmianski/laravel-helper": {
+            "type": "path",
+            "url": "packages/osmianski/laravel-helper",
+            "options": {
+                "symlink": true
+            }
+        },
         "osmianski/laravel-workflowy": {
             "type": "path",
             "url": "packages/osmianski/laravel-workflowy",
