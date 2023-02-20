@@ -17,8 +17,10 @@ return new class extends Migration
 
             $table->string('workflowy_id')->unique();
             $table->string('name')->index();
+            $table->string('type', 20)->nullable()->index();
             $table->unsignedSmallInteger('position')->index();
             $table->text('description')->nullable();
+            $table->boolean('is_obsolete')->default(false);
         });
     }
 

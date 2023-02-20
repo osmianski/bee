@@ -31,8 +31,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTimeTz('planned_at')->nullable();
             $table->dateTimeTz('completed_at')->nullable();
-            $table->text('path');
-            $table->boolean('is_leaf')->default(false);
+            $table->text('parent_path')->nullable();
+            $table->boolean('has_children')->default(false);
+            $table->boolean('is_obsolete')->default(false);
         });
     }
 

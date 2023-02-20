@@ -26,6 +26,6 @@ class WorkflowyPull extends Command
      */
     public function handle(): void
     {
-        PullWorkflowyWorkspace::dispatch();
+        PullWorkflowyWorkspace::dispatch(true);
     }
 }

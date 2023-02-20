@@ -25,9 +25,28 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Project wherePosition($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereWorkflowyId($value)
+ * @property \App\Models\Project\Type|null $type
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereType($value)
+ * @property bool $is_obsolete
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereIsObsolete($value)
  * @mixin \Eloquent
  */
 class Project extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'workflowy_id',
+        'name',
+        'type',
+        'position',
+        'description',
+        'is_obsolete',
+    ];
+
+    protected $casts = [
+        'type' => Project\Type::class,
+        'is_obsolete' => 'boolean',
+    ];
+
 }

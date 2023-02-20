@@ -10,6 +10,7 @@ class Node
     public Workspace $workspace;
     public ?Node $parent;
     public int $depth;
+    public int $position;
     public string $id;
     public ?string $name;
     public ?string $note;

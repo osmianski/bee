@@ -4,8 +4,9 @@ namespace Osmianski\Workflowy;
 
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
+use Osmianski\Helper\Exceptions\NotImplemented;
 use Osmianski\Workflowy\Exceptions\InvalidCredentials;
-use Osmianski\Workflowy\Exceptions\NotImplemented;
+use Osmianski\Workflowy\Node\Layout;
 
 class Workflowy
 {
@@ -80,8 +81,50 @@ class Workflowy
         $this->sessionId = $cookie->getValue();
     }
 
-    protected function createWorkspace(object $raw): Workspace
+    protected function createWorkspace(\stdClass $raw): Workspace
     {
-        throw new NotImplemented();
+        $workspace = new Workspace();
+
+        $workspace->children = $this->createChildren(
+            $raw->projectTreeData->mainProjectTreeInfo->rootProjectChildren,
+            $workspace,
+        );
+
+        return $workspace;
+    }
+
+    protected function createChildren(array $raw, Workspace $workspace,
+        ?Node $parent = null): array
+    {
+        $children = [];
+
+        foreach ($raw as $position => $item) {
+            $children[] = $this->createNode($item, $workspace, $parent, $position);
+        }
+
+        return $children;
+    }
+
+    protected function createNode(\stdClass $raw, Workspace $workspace,
+        ?Node $parent, int $position): Node
+    {
+        $node = new Node();
+
+        $node->workspace = $workspace;
+        $node->parent = $parent;
+        $node->position = $position;
+        $node->id = $raw->id;
+        $node->name = $raw->nm ?? null;
+        $node->note = $raw->no ?? null;
+        $node->layout = ($layout = ($this->raw->metadata->layoutMode ?? null))
+            ? Layout::tryFrom($layout)
+            : null;
+        $node->children = $this->createChildren(
+            $raw->ch ?? [],
+            $workspace,
+            $node
+        );
+
+        return $node;
     }
 }

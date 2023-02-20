@@ -1,6 +1,6 @@
 <?php
 
-namespace Osmianski\Workflowy\Exceptions;
+namespace Osmianski\Helper\Exceptions;
 
 class NotImplemented extends \Exception
 {
