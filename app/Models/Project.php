@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Project
@@ -49,4 +50,8 @@ class Project extends Model
         'is_obsolete' => 'boolean',
     ];
 
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }

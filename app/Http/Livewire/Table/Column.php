@@ -2,9 +2,29 @@
 
 namespace App\Http\Livewire\Table;
 
-use Osmianski\Helper\Traits\ConstructedFromArray;
+use Illuminate\Database\Eloquent\Model;
+use Osmianski\Helper\Object_;
 
-class Column
+/**
+ * @property ?string $title
+ */
+class Column extends Object_
 {
-    use ConstructedFromArray;
+    public string $name;
+
+    protected function get_title(): ?string
+    {
+        return null;
+    }
+
+    public function value(Model $item): mixed
+    {
+        $value = $item;
+
+        foreach (explode('.', $this->name) as $property) {
+            $value = $value->$property;
+        }
+
+        return $value;
+    }
 }

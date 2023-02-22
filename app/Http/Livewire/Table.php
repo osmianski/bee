@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 abstract class Table extends Component
@@ -10,8 +12,10 @@ abstract class Table extends Component
     {
         return view('livewire.table', [
             'note' => $this->getNote(),
-            'columns' => array_map(fn(array $data) => new Table\Column($data),
-                $this->getColumns()),
+            'columns' => collect($this->getColumns())
+                ->map(fn(array $data, string $name) => new Table\Column(
+                    array_merge($data, ['name' => $name]))),
+            'data' => $this->getData(),
         ]);
     }
 
@@ -21,4 +25,5 @@ abstract class Table extends Component
     }
 
     protected abstract function getColumns(): array;
+    protected abstract function getData(): LengthAwarePaginator;
 }
