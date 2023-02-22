@@ -25,21 +25,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('projects');
 
     Route::get('/tasks/all', function () {
-        return view('pages.tasks');
+        return view('pages.tasks-all');
     })->name('tasks.all');
 
     Route::get('/tasks/todo', function () {
-        return view('pages.tasks', [
-            'title' => 'To do',
-            'type' => Task\Type::Todo,
-        ]);
+        return view('pages.tasks-todo');
     })->name('tasks.todo');
 
     Route::get('/tasks/calendar', function () {
-        return view('pages.tasks', [
-            'title' => 'Calendar',
-            'type' => Task\Type::Calendar,
-        ]);
+        return view('pages.tasks-calendar');
     })->name('tasks.calendar');
 });
 

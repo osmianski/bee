@@ -4,14 +4,17 @@ namespace App\Http\Livewire;
 
 use App\Models\Task;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class Tasks extends Table
 {
-    public ?Task\Type $type = null;
-
     protected function getColumns(): array
     {
-        $columns = [
+        return [
+            'project_name' => [
+                'title' => 'Project',
+            ],
             'name' => [
                 'title' => 'Name',
             ],
@@ -19,23 +22,11 @@ class Tasks extends Table
                 'title' => 'Description',
             ],
         ];
-
-        if (!$this->type) {
-            $columns['type'] = [
-                'title' => 'Type',
-            ];
-        }
-
-        $columns['project_name'] = [
-            'title' => 'Project',
-        ];
-
-        return $columns;
     }
 
-    protected function getData(): LengthAwarePaginator
+    protected function getQuery(): QueryBuilder|EloquentBuilder
     {
-        $query = Task::query()
+        return Task::query()
             ->leftJoin('projects', 'projects.id', '=', 'tasks.project_id')
             ->select([
                 'tasks.name AS name',
@@ -45,14 +36,10 @@ class Tasks extends Table
             ->where('has_children', '=', false)
             ->orderBy('projects.position')
             ->orderBy('tasks.position');
+    }
 
-        if ($this->type) {
-            $query->where('tasks.type', '=', $this->type);
-        }
-        else {
-            $query->addSelect('tasks.type AS type');
-        }
-
-        return $query->paginate();
+    protected function getData(): LengthAwarePaginator
+    {
+        return $this->getQuery()->paginate();
     }
 }
