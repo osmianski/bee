@@ -22,6 +22,14 @@ return [
                 'route' => 'tasks.all',
                 'title' => 'All tasks',
             ],
+            [
+                'route' => 'tasks.todo',
+                'title' => 'Todo',
+            ],
+            [
+                'route' => 'tasks.calendar',
+                'title' => 'Calendar',
+            ],
         ],
     ],
 ];

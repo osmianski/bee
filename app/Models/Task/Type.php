@@ -11,7 +11,7 @@ enum Type: string
 
     public static function parse(string $value): ?Type
     {
-        return match($value) {
+        return match(trim($value)) {
             '#todo' => Type::Todo,
             '#calendar' => Type::Calendar,
             '#delegate' => Type::Delegate,

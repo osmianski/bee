@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Task;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/tasks/all', function () {
         return view('pages.tasks');
     })->name('tasks.all');
+
+    Route::get('/tasks/todo', function () {
+        return view('pages.tasks', [
+            'title' => 'To do',
+            'type' => Task\Type::Todo,
+        ]);
+    })->name('tasks.todo');
+
+    Route::get('/tasks/calendar', function () {
+        return view('pages.tasks', [
+            'title' => 'Calendar',
+            'type' => Task\Type::Calendar,
+        ]);
+    })->name('tasks.calendar');
 });
 
 //Route::get('/dashboard', function () {

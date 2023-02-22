@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Jobs\PullWorkflowyWorkspace\State;
 use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Bus\Queueable;
@@ -60,14 +59,6 @@ class PullWorkflowyWorkspace implements ShouldQueue
             $project = $this->createProject($node);
             $this->createTaskGroups($project, $node->children);
         }
-    }
-
-    protected function clear(): void
-    {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Project::truncate();
-        Task::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 
     protected function createProject(Node $node): Project
