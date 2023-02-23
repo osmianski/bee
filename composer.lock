@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc66dfab251a05cc33ad2ee03a241a7c",
+    "content-hash": "78b85f14de025f43e8ebc59b1c3e4978",
     "packages": [
         {
             "name": "brick/math",
@@ -2505,6 +2505,60 @@
             "keywords": [
                 "Helper",
                 "Laravel"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "osmianski/laravel-reflection",
+            "version": "0.3.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "packages/osmianski/laravel-reflection",
+                "reference": "d3c869d2f1b0699cf9d1ffd3648321985e606a9a"
+            },
+            "require": {
+                "illuminate/support": "~10"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7",
+                "phpunit/phpunit": "~10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Osmianski\\Reflection\\ReflectionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Osmianski\\Reflection\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Osmianski\\Reflection\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladislav Osmianskij",
+                    "email": "vlaosm@gmail.com",
+                    "homepage": "https://osmianski.com/"
+                }
+            ],
+            "description": "Advanced reflection library",
+            "homepage": "https://github.com/osmianski/laravel-refkection",
+            "keywords": [
+                "Laravel",
+                "Reflection"
             ],
             "transport-options": {
                 "symlink": true,
@@ -9389,6 +9443,7 @@
         "osmianski/laravel-composer-lock": 20,
         "osmianski/laravel-extensibility": 20,
         "osmianski/laravel-helper": 20,
+        "osmianski/laravel-reflection": 20,
         "osmianski/laravel-workflowy": 20
     },
     "prefer-stable": true,

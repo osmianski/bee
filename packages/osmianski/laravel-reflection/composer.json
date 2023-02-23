@@ -1,0 +1,38 @@
+{
+    "name": "osmianski/laravel-reflection",
+    "description": "Advanced reflection library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladislav Osmianskij",
+            "email": "vlaosm@gmail.com",
+            "homepage": "https://osmianski.com/"
+        }
+    ],
+    "homepage": "https://github.com/osmianski/laravel-refkection",
+    "keywords": ["Laravel", "Reflection"],
+    "require": {
+        "illuminate/support": "~10"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~10.0",
+        "orchestra/testbench": "~7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Osmianski\\Reflection\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Osmianski\\Reflection\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Osmianski\\Reflection\\ReflectionServiceProvider"
+            ]
+        }
+    }
+}

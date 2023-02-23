@@ -15,6 +15,7 @@
         "osmianski/laravel-composer-lock": "@dev",
         "osmianski/laravel-extensibility": "@dev",
         "osmianski/laravel-helper": "@dev",
+        "osmianski/laravel-reflection": "@dev",
         "osmianski/laravel-workflowy": "@dev"
     },
     "require-dev": {
@@ -93,6 +94,13 @@
         "osmianski/laravel-helper": {
             "type": "path",
             "url": "packages/osmianski/laravel-helper",
+            "options": {
+                "symlink": true
+            }
+        },
+        "osmianski/laravel-reflection": {
+            "type": "path",
+            "url": "packages/osmianski/laravel-reflection",
             "options": {
                 "symlink": true
             }
