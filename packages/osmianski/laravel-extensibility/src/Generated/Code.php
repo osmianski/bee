@@ -1,6 +1,6 @@
 <?php
 
-namespace Osmianski\Copilot\Generated;
+namespace Osmianski\Extensibility\Generated;
 
 class Code
 {

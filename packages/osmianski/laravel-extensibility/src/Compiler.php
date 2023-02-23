@@ -1,6 +1,6 @@
 <?php
 
-namespace Osmianski\Copilot;
+namespace Osmianski\Extensibility;
 
 use Osmianski\Helper\Traits\ConstructedFromArray;
 

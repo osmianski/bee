@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fcf16f486fe5267ad9fdb892e00c42e2",
+    "content-hash": "bc66dfab251a05cc33ad2ee03a241a7c",
     "packages": [
         {
             "name": "brick/math",
@@ -1780,16 +1780,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v2.12.0",
+            "version": "v2.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "9da51085a7b02a8512a9d4c525d5ea96e8f52aa0"
+                "reference": "c0bd6619358b333f5e47428a4413cc5d24bd60dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/9da51085a7b02a8512a9d4c525d5ea96e8f52aa0",
-                "reference": "9da51085a7b02a8512a9d4c525d5ea96e8f52aa0",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/c0bd6619358b333f5e47428a4413cc5d24bd60dd",
+                "reference": "c0bd6619358b333f5e47428a4413cc5d24bd60dd",
                 "shasum": ""
             },
             "require": {
@@ -1841,7 +1841,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v2.12.0"
+                "source": "https://github.com/livewire/livewire/tree/v2.12.1"
             },
             "funding": [
                 {
@@ -1849,7 +1849,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-20T13:30:53+00:00"
+            "time": "2023-02-22T21:13:21+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2403,12 +2403,12 @@
             }
         },
         {
-            "name": "osmianski/laravel-copilot",
+            "name": "osmianski/laravel-extensibility",
             "version": "0.3.x-dev",
             "dist": {
                 "type": "path",
-                "url": "packages/osmianski/laravel-copilot",
-                "reference": "cd2a6c88a41b8d59244e33c5887fb5e7b05e218a"
+                "url": "packages/osmianski/laravel-extensibility",
+                "reference": "f07985df8261008341eb9bfa128af5036e40390c"
             },
             "require": {
                 "illuminate/support": "~10"
@@ -2421,18 +2421,19 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Osmianski\\Copilot\\CopilotServiceProvider"
+                        "Osmianski\\Extensibility\\ExtensibilityServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Osmianski\\Copilot\\": "src/"
+                    "Osmianski\\Extensibility\\": "src/",
+                    "Osmianski\\Extensibility\\Samples\\": "samples/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "Osmianski\\Copilot\\Tests\\": "tests"
+                    "Osmianski\\Extensibility\\Tests\\": "tests"
                 }
             },
             "license": [
@@ -2445,10 +2446,10 @@
                     "homepage": "https://osmianski.com/"
                 }
             ],
-            "description": "A code generator that implements mundane things instead of you",
-            "homepage": "https://github.com/osmianski/laravel-copilot",
+            "description": "Allows 3rd parties extend your classes",
+            "homepage": "https://github.com/osmianski/laravel-extensibility",
             "keywords": [
-                "Copilot",
+                "Extensibility",
                 "Laravel"
             ],
             "transport-options": {
@@ -9386,7 +9387,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "osmianski/laravel-composer-lock": 20,
-        "osmianski/laravel-copilot": 20,
+        "osmianski/laravel-extensibility": 20,
         "osmianski/laravel-helper": 20,
         "osmianski/laravel-workflowy": 20
     },

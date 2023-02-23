@@ -1,6 +1,6 @@
 <?php
 
-namespace Osmianski\Copilot\Traits;
+namespace Osmianski\Extensibility\Traits;
 
 trait Extensible
 {

@@ -114,13 +114,16 @@ class PullWorkflowyWorkspace implements ShouldQueue
     protected function createTask(Project $project, Task\Type $type, Node $node,
         ?Task $parent): Task
     {
+        [$description, $plannedAt] = $this->parseTaskDescription($node->note);
+
         return Task::updateOrCreate(['workflowy_id' => $node->id], [
             'project_id' => $project->id,
             'parent_id' => $parent?->id,
             'name' => mb_substr($node->name, 0, 255),
             'type' => $type,
             'position' => $node->position,
-            'description' => $node->note,
+            'description' => $description,
+            'planned_at' => $plannedAt,
             'parent_path' => $parent
                 ? ($parent->parent_path
                     ? "{$parent->parent_path} > {$parent->name}"
@@ -141,5 +144,16 @@ class PullWorkflowyWorkspace implements ShouldQueue
     {
         Project::where('is_obsolete', '=', true)->delete();
         Task::where('is_obsolete', '=', true)->delete();
+    }
+
+    protected function parseTaskDescription(?string $note): array
+    {
+        if (!$note) {
+            return [null, null];
+        }
+
+        return ($type = Project\Type::parse(mb_substr($name, 0, 1)))
+            ? [mb_substr($name, 2), $type]
+            : [$name, null];
     }
 }

@@ -1,6 +1,6 @@
 {
-    "name": "osmianski/laravel-copilot",
-    "description": "A code generator that implements mundane things instead of you",
+    "name": "osmianski/laravel-extensibility",
+    "description": "Allows 3rd parties extend your classes",
     "license": "MIT",
     "authors": [
         {
@@ -9,8 +9,8 @@
             "homepage": "https://osmianski.com/"
         }
     ],
-    "homepage": "https://github.com/osmianski/laravel-copilot",
-    "keywords": ["Laravel", "Copilot"],
+    "homepage": "https://github.com/osmianski/laravel-extensibility",
+    "keywords": ["Laravel", "Extensibility"],
     "require": {
         "illuminate/support": "~10"
     },
@@ -20,18 +20,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Osmianski\\Copilot\\": "src/"
+            "Osmianski\\Extensibility\\": "src/",
+            "Osmianski\\Extensibility\\Samples\\": "samples/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Osmianski\\Copilot\\Tests\\": "tests"
+            "Osmianski\\Extensibility\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Osmianski\\Copilot\\CopilotServiceProvider"
+                "Osmianski\\Extensibility\\ExtensibilityServiceProvider"
             ]
         }
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Osmianski\Copilot\Attributes;
+namespace Osmianski\Extensibility\Attributes;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final class UseIn
+final class Extends_
 {
     public function __construct(public string $className)
     {

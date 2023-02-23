@@ -13,7 +13,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.12",
         "osmianski/laravel-composer-lock": "@dev",
-        "osmianski/laravel-copilot": "@dev",
+        "osmianski/laravel-extensibility": "@dev",
         "osmianski/laravel-helper": "@dev",
         "osmianski/laravel-workflowy": "@dev"
     },
@@ -83,9 +83,9 @@
                 "symlink": true
             }
         },
-        "osmianski/laravel-copilot": {
+        "osmianski/laravel-extensibility": {
             "type": "path",
-            "url": "packages/osmianski/laravel-copilot",
+            "url": "packages/osmianski/laravel-extensibility",
             "options": {
                 "symlink": true
             }
