@@ -7,5 +7,5 @@ use Osmianski\Helper\Attributes\StdClass;
 #[StdClass]
 abstract class Package
 {
-
+    public \stdClass $autoload;
 }

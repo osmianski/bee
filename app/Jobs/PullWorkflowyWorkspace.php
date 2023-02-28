@@ -152,8 +152,6 @@ class PullWorkflowyWorkspace implements ShouldQueue
             return [null, null];
         }
 
-        return ($type = Project\Type::parse(mb_substr($name, 0, 1)))
-            ? [mb_substr($name, 2), $type]
-            : [$name, null];
+        return [$note, null];
     }
 }
