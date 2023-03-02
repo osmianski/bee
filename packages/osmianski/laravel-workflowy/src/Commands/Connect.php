@@ -4,6 +4,7 @@ namespace Osmianski\Workflowy\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Crypt;
+use Osmianski\Helper\EnvironmentFileEditor;
 use Osmianski\Workflowy\Exceptions\InvalidCredentials;
 use Osmianski\Workflowy\Workflowy;
 
@@ -26,7 +27,7 @@ class Connect extends Command
     /**
      * Execute the console command.
      */
-    public function handle(): void
+    public function handle(EnvironmentFileEditor $env): void
     {
         $this->line('Enter your Workflowy credentials');
         $username = $this->ask('Username');
@@ -44,37 +45,9 @@ class Connect extends Command
 
         $this->info('Successfully connected to Workflowy!');
 
-        $this->writeNewEnvironmentFileWith([
+        $env->edit([
             'WORKFLOWY_USERNAME' => $username,
             'WORKFLOWY_PASSWORD' => $password,
         ]);
-    }
-
-    protected function writeNewEnvironmentFileWith(array $variables): void
-    {
-        $contents = file_get_contents($this->laravel->environmentFilePath());
-
-        foreach ($variables as $variable => $value) {
-            $this->setVariable($contents, $variable, $value);
-        }
-
-        file_put_contents($this->laravel->environmentFilePath(), $contents);
-    }
-
-    protected function setVariable(string &$contents, string $variable,
-        string $value): void
-    {
-        $replaced = preg_replace(
-            "/^" . preg_quote($variable) . "=.*$/m",
-            "{$variable}={$value}",
-            $contents
-        );
-
-        if ($contents !== $replaced) {
-            $contents = $replaced;
-        }
-        else {
-            $contents .= "\n{$variable}={$value}";
-        }
     }
 }
