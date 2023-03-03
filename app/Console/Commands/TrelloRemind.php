@@ -7,6 +7,7 @@ use App\Trello\Card;
 use App\Trello\Trello;
 use App\Trello\Workspace;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Osmianski\Helper\Exceptions\NotImplemented;
 
 class TrelloRemind extends Command
@@ -25,6 +26,8 @@ class TrelloRemind extends Command
      */
     protected $description = 'In a given board or workspace, set a reminder 5 minutes before a card is due';
 
+    protected int $updated = 0;
+
     /**
      * Execute the console command.
      */
@@ -35,16 +38,20 @@ class TrelloRemind extends Command
 
         if ($workspace = $trello->getWorkspaces()[$id] ?? null) {
             $this->handleWorkspace($workspace);
-            return static::SUCCESS;
         }
-
-        if ($board = $trello->getBoards(open: true)[$id] ?? null) {
+        elseif ($board = $trello->getBoards(open: true)[$id] ?? null) {
             $this->handleBoard($board);
             return static::SUCCESS;
         }
+        else {
+            $this->error("Workspace or board with ID '{$id}' not found.");
+            return static::FAILURE;
+        }
 
-        $this->error("Workspace or board with ID '{$id}' not found.");
-        return static::FAILURE;
+        $this->info("{$this->updated} cards updated");
+        Log::info("{$this->updated} cards updated");
+
+        return static::SUCCESS;
     }
 
     protected function handleWorkspace(Workspace $workspace): void
@@ -66,5 +73,6 @@ class TrelloRemind extends Command
     protected function handleCard(Card $card): void
     {
         $card->update(['reminder' => 5]);
+        $this->updated++;
     }
 }

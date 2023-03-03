@@ -22,6 +22,10 @@ class Card extends Object_
     public function update(array $data): void
     {
         $this->trello->put("cards/{$this->id}?" . http_build_query(static::toTrello($data)));
+
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     public static function fromTrello(\stdClass $raw, array $data = []): array

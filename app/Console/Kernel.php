@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // VO 2023
+        $schedule->command('trello:remind 63fdce8dcdffdbd05cfadcc1')->monthly();
     }
 
     /**
