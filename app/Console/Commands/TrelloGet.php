@@ -28,8 +28,6 @@ class TrelloGet extends Command
     {
         $trello = new Trello();
 
-        $response = $trello->get($this->argument('path'));
-
-        echo json_encode($response->object(), JSON_PRETTY_PRINT);
+        echo json_encode($trello->get($this->argument('path')), JSON_PRETTY_PRINT);
     }
 }

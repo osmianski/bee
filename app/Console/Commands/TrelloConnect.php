@@ -34,9 +34,8 @@ class TrelloConnect extends Command
         $this->line('2. Manually generate a token using a link near the API key.');
         $token = Crypt::encrypt($this->secret('Paste the generated token'));
 
-        $trello = new Trello();
-        $trello->setCredentials($apiKey, $token);
-        $trello->getBoards();
+        $trello = new Trello(['api_key' => $apiKey, 'token' => $token]);
+        $trello->get('members/me/boards');
 
         $this->info('Successfully connected to Trello!');
 

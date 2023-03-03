@@ -13,7 +13,7 @@ class TrelloBoards extends Command
      *
      * @var string
      */
-    protected $signature = 'trello:boards';
+    protected $signature = 'trello:boards {--open} {--closed}';
 
     /**
      * The console command description.
@@ -29,7 +29,16 @@ class TrelloBoards extends Command
     {
         $trello = new Trello();
 
-        $this->table(['ID', 'Name', 'Closed'], collect($trello->getBoards())
+        $boards = $trello->getBoards(
+            open: $this->option('open')
+                ? true
+                : ($this->option('closed')
+                    ? false
+                    : null
+                ),
+        );
+
+        $this->table(['ID', 'Name', 'Closed'], collect($boards)
             ->map(fn(Board $board) => [$board->id, $board->name, $board->closed])
             ->toArray()
         );
