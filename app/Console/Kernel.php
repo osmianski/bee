@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // VO 2023 workspace
         $schedule->command('trello:remind 63fdce8dcdffdbd05cfadcc1')->dailyAt('05:00');
+        $schedule->command('trello:repeat')->monthlyOn(28, '05:00');
     }
 
     /**
