@@ -16,7 +16,8 @@
         "osmianski/laravel-extensibility": "@dev",
         "osmianski/laravel-helper": "@dev",
         "osmianski/laravel-reflection": "@dev",
-        "osmianski/laravel-workflowy": "@dev"
+        "osmianski/laravel-workflowy": "@dev",
+        "symfony/yaml": "^6.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",

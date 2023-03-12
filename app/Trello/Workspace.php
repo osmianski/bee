@@ -18,4 +18,15 @@ class Workspace extends Object_
         return $this->trello->toBoards($this->trello->get(
             $this->trello->boardUrl("organizations/{$this->id}/boards", $open)));
     }
+
+    public function getBoardByName(string $name): ?Board
+    {
+        foreach ($this->getBoards() as $board) {
+            if (trim($board->name) === trim($name) && !$board->closed) {
+                return $board;
+            }
+        }
+
+        return null;
+    }
 }

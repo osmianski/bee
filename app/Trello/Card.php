@@ -19,6 +19,12 @@ class Card extends Object_
      */
     public ?int $reminder;
 
+    /**
+     * IDs of assigned members
+     * @var array
+     */
+    public array $members = [];
+
     public function update(array $data): void
     {
         $this->trello->put("cards/{$this->id}?" . http_build_query(static::toTrello($data)));
@@ -36,6 +42,7 @@ class Card extends Object_
             'closed' => $raw->closed,
             'due' => $raw->due ? Carbon::parse($raw->due, 'UTC') : null,
             'reminder' => $raw->dueReminder !== -1 ? $raw->dueReminder : null,
+            'members' => $raw->idMembers,
         ]);
     }
 
@@ -57,6 +64,10 @@ class Card extends Object_
 
         if (array_key_exists('reminder', $data)) {
             $result['dueReminder'] = $data['reminder'] !== null ? $data['reminder'] : -1;
+        }
+
+        if (array_key_exists('members', $data)) {
+            $result['idMembers'] = implode(',', $data['members']);
         }
 
         return $result;

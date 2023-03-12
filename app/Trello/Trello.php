@@ -29,6 +29,11 @@ class Trello extends Object_
     /**
      * @return array|Board[]
      */
+    public function getMe(): Member
+    {
+        return new Member(Member::fromTrello($this->get('members/me'), ['trello' => $this]));
+    }
+
     public function getBoards(bool $open = null): array
     {
         return $this->toBoards($this->get($this->boardUrl('members/me/boards', $open)));
@@ -40,6 +45,17 @@ class Trello extends Object_
     public function getWorkspaces(): array
     {
         return $this->toWorkspaces($this->get('members/me/organizations'));
+    }
+
+    public function getWorkspaceByName(string $name): ?Workspace
+    {
+        foreach ($this->getWorkspaces() as $workspace) {
+            if (trim($workspace->name) === trim($name)) {
+                return $workspace;
+            }
+        }
+
+        return null;
     }
 
     protected function urlCredentials(): string
@@ -66,6 +82,16 @@ class Trello extends Object_
         $response = Http::put("{$this->base_url}{$url}{$delimiter}{$this->urlCredentials()}");
 
         $response->throw();
+    }
+
+    public function post(string $url): \stdClass|array
+    {
+        $delimiter = str_contains($url, '?') ? '&' : '?';
+        $response = Http::post("{$this->base_url}{$url}{$delimiter}{$this->urlCredentials()}");
+
+        $response->throw();
+
+        return $response->object();
     }
 
     /**
@@ -104,6 +130,14 @@ class Trello extends Object_
             ->toArray();
     }
 
+    public function toLists(array $response): array
+    {
+        return collect($response)
+            ->map(fn(\stdClass $raw) => new List_(List_::fromTrello($raw, [ 'trello' => $this ])))
+            ->keyBy('id')
+            ->toArray();
+    }
+
     public function boardUrl(string $url, ?bool $open): string
     {
         $query = [];
@@ -123,6 +157,20 @@ class Trello extends Object_
         $query = [];
         if ($open !== null) {
             $query['filter'] = $open ? 'open' : 'closed';
+        }
+
+        if (!empty($query)) {
+            $url .= '?' . http_build_query($query);
+        }
+
+        return $url;
+    }
+
+    public function listUrl(string $url, ?bool $archived): string
+    {
+        $query = [];
+        if ($archived !== null) {
+            $query['filter'] = $archived ? 'closed' : 'open';
         }
 
         if (!empty($query)) {
