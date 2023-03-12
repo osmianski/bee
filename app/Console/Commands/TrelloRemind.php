@@ -49,7 +49,7 @@ class TrelloRemind extends Command
         }
 
         $this->info("{$this->updated} cards updated");
-        Log::info("{$this->updated} cards updated");
+        Log::info("trello:remind: {$this->updated} cards updated");
 
         return static::SUCCESS;
     }

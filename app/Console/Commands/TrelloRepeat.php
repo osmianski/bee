@@ -54,7 +54,7 @@ class TrelloRepeat extends Command
         }
 
         $this->info("{$this->created} cards created, {$this->updated} updated");
-        Log::info("{$this->created} cards created, {$this->updated} updated");
+        Log::info("trello:repeat: {$this->created} cards created, {$this->updated} updated");
     }
 
     protected function getList(string $workspaceName, string $boardName, string $listName)
