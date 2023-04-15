@@ -6,12 +6,11 @@ use App\Exceptions\NotFound;
 use App\Trello\Card;
 use App\Trello\List_;
 use App\Trello\Member;
-use App\Trello\RepeatMonthlyRule;
+use App\Trello\Rule;
 use App\Trello\Trello;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
-use Osmianski\Helper\Exceptions\NotImplemented;
 use Symfony\Component\Yaml\Yaml;
 
 class TrelloRepeat extends Command
@@ -50,7 +49,11 @@ class TrelloRepeat extends Command
         $config = Yaml::parseFile(base_path('trello.yml'));
 
         foreach ($config['repeat_monthly'] ?? [] as $data) {
-            $this->handleMonthlyRule(new RepeatMonthlyRule($data));
+            $this->handleMonthlyRule(new Rule\RepeatMonthly($data));
+        }
+
+        foreach ($config['repeat_quarterly'] ?? [] as $data) {
+            $this->handleQuarterlyRule(new Rule\RepeatQuarterly($data));
         }
 
         $this->info("{$this->created} cards created, {$this->updated} updated");
@@ -93,16 +96,29 @@ class TrelloRepeat extends Command
         return $this->cardCache[$list->id];
     }
 
-    protected function handleMonthlyRule(RepeatMonthlyRule $rule): void
+    protected function handleMonthlyRule(Rule\RepeatMonthly $rule): void
     {
-        $this->createMonthlyCard($rule, now()->setDay($rule->day)
+        $this->createCard($rule, now()->setDay($rule->day)
             ->setHour(9)->setMinute(0)->setSecond(0));
-        $this->createMonthlyCard($rule, now()->addMonth()->setDay($rule->day)
+        $this->createCard($rule, now()->addMonth()->setDay($rule->day)
             ->setHour(9)->setMinute(0)->setSecond(0));
     }
 
-    protected function createMonthlyCard(RepeatMonthlyRule $rule,
-        Carbon $due): void
+    protected function handleQuarterlyRule(Rule\RepeatQuarterly $rule): void
+    {
+        // 1 => -1, 2 => -2, 3 => -3, 4 => -1, 5 => -2, 6 => -3,
+        // 7 => -1, 8 => -2, 9 => -3, 10 => -1, 11 => -2, 12 => -3
+        $offset = -1 * ((now()->month  - 1) % 3 + 1);
+
+        $this->createCard($rule, now()
+            ->addMonths($offset + $rule->month)->setDay($rule->day)
+            ->setHour(9)->setMinute(0)->setSecond(0));
+        $this->createCard($rule, now()
+            ->addMonths($offset + $rule->month + 3)->setDay($rule->day)
+            ->setHour(9)->setMinute(0)->setSecond(0));
+    }
+
+    protected function createCard(Rule $rule, Carbon $due): void
     {
         if ($due->lessThan(now())) {
             return;
@@ -110,7 +126,7 @@ class TrelloRepeat extends Command
 
         $list = $this->getList($rule->workspace, $rule->board, $rule->list);
 
-        if ($card = $this->getMonthlyCard($list, $rule->name, $due)) {
+        if ($card = $this->getCard($list, $rule->name, $due)) {
             if (!$card->reminder || !in_array($this->me->id, $card->members)) {
                 $card->update([
                     'reminder' => 5,
@@ -130,7 +146,7 @@ class TrelloRepeat extends Command
         }
     }
 
-    protected function getMonthlyCard(List_ $list, string $cardName, Carbon $due): ?Card
+    protected function getCard(List_ $list, string $cardName, Carbon $due): ?Card
     {
         foreach ($this->getCards($list) as $card) {
             if (trim($card->name) !== $cardName) {
